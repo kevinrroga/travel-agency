@@ -1,10 +1,9 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import DestinationsSection from "@/components/DestinationsSection";
-import ExperiencesSection from "@/components/ExperiencesSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const Index = () => {
   return (
@@ -13,11 +12,11 @@ const Index = () => {
       <main>
         <HeroSection />
         <DestinationsSection />
-        <ExperiencesSection />
-        <TestimonialsSection />
+        
         <NewsletterSection />
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };

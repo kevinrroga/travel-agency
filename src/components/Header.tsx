@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, MapPin, Phone } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/translations";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const navLinks = [
-    { name: "Destinations", href: "#destinations" },
-    { name: "Experiences", href: "#experiences" },
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
+    { name: t.header.destinations, href: "#destinations" },
+    { name: t.header.about, href: "#about" },
+    { name: t.header.contact, href: "#contact" },
   ];
 
   return (
@@ -39,12 +43,16 @@ const Header = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            <a href="tel:+1234567890" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+            <a
+              href="tel:+1234567890"
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+            >
               <Phone className="h-4 w-4" />
-              <span className="text-sm font-medium">+1 (234) 567-890</span>
+              <span className="text-sm font-medium">{t.header.phone}</span>
             </a>
+            <LanguageSwitcher />
             <Button variant="default" size="lg">
-              Plan Your Trip
+              {t.header.planTrip}
             </Button>
           </div>
 
@@ -54,7 +62,11 @@ const Header = () => {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
         </div>
 
@@ -72,8 +84,9 @@ const Header = () => {
                   {link.name}
                 </a>
               ))}
+              <LanguageSwitcher />
               <Button variant="default" size="lg" className="mt-4">
-                Plan Your Trip
+                {t.header.planTrip}
               </Button>
             </nav>
           </div>

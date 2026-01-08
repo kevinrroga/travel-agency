@@ -1,39 +1,55 @@
-import { MapPin, Instagram, Twitter, Facebook, Youtube } from "lucide-react";
-
-const footerLinks = {
-  destinations: [
-    { name: "Europe", href: "#" },
-    { name: "Asia", href: "#" },
-    { name: "Americas", href: "#" },
-    { name: "Africa", href: "#" },
-    { name: "Oceania", href: "#" },
-  ],
-  company: [
-    { name: "About Us", href: "#about" },
-    { name: "Our Team", href: "#" },
-    { name: "Careers", href: "#" },
-    { name: "Press", href: "#" },
-    { name: "Partners", href: "#" },
-  ],
-  support: [
-    { name: "Contact", href: "#contact" },
-    { name: "FAQ", href: "#" },
-    { name: "Travel Insurance", href: "#" },
-    { name: "Booking Terms", href: "#" },
-    { name: "Privacy Policy", href: "#" },
-  ],
-};
+import { MapPin, Instagram, Facebook, Youtube } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/translations";
 
 const socialLinks = [
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Facebook, href: "#", label: "Facebook" },
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/arlin_travel_and_tours/",
+    label: "Instagram",
+  },
+
+  {
+    icon: Facebook,
+    href: "https://www.facebook.com/p/Arlin-Travel-and-Tour-Agency-61553088734617/",
+    label: "Facebook",
+  },
   { icon: Youtube, href: "#", label: "YouTube" },
 ];
 
 const Footer = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  const footerLinks = {
+    destinations: [
+      { name: t.footer.europe, href: "#" },
+      { name: t.footer.asia, href: "#" },
+      { name: t.footer.americas, href: "#" },
+      { name: t.footer.africa, href: "#" },
+      { name: t.footer.oceania, href: "#" },
+    ],
+    company: [
+      { name: t.footer.aboutUs, href: "#about" },
+      { name: t.footer.ourTeam, href: "#" },
+      { name: t.footer.careers, href: "#" },
+      { name: t.footer.press, href: "#" },
+      { name: t.footer.partners, href: "#" },
+    ],
+    support: [
+      { name: t.footer.contact, href: "#contact" },
+      { name: t.footer.faq, href: "#" },
+      { name: t.footer.insurance, href: "#" },
+      { name: t.footer.bookingTerms, href: "#" },
+      { name: t.footer.privacyPolicy, href: "#" },
+    ],
+  };
+
   return (
-    <footer id="contact" className="bg-foreground text-primary-foreground py-16">
+    <footer
+      id="contact"
+      className="bg-foreground text-primary-foreground py-16"
+    >
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand */}
@@ -45,14 +61,15 @@ const Footer = () => {
               </span>
             </a>
             <p className="text-primary-foreground/70 mb-6 max-w-sm">
-              Crafting extraordinary journeys for discerning travelers since 2010. 
-              Your adventure of a lifetime starts here.
+              {t.footer.tagline}
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
                 >
@@ -64,11 +81,14 @@ const Footer = () => {
 
           {/* Links */}
           <div>
-            <h4 className="font-semibold mb-4">Destinations</h4>
+            <h4 className="font-semibold mb-4">{t.footer.destinationsTitle}</h4>
             <ul className="space-y-3">
               {footerLinks.destinations.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  <a
+                    href={link.href}
+                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                  >
                     {link.name}
                   </a>
                 </li>
@@ -77,11 +97,14 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Company</h4>
+            <h4 className="font-semibold mb-4">{t.footer.companyTitle}</h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  <a
+                    href={link.href}
+                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                  >
                     {link.name}
                   </a>
                 </li>
@@ -90,11 +113,14 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Support</h4>
+            <h4 className="font-semibold mb-4">{t.footer.supportTitle}</h4>
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  <a
+                    href={link.href}
+                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                  >
                     {link.name}
                   </a>
                 </li>
@@ -106,12 +132,27 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-primary-foreground/60 text-sm">
-            © 2025 Wanderlust Travel. All rights reserved.
+            {t.footer.copyright}
           </p>
           <div className="flex gap-6 text-sm text-primary-foreground/60">
-            <a href="#" className="hover:text-primary-foreground transition-colors">Privacy</a>
-            <a href="#" className="hover:text-primary-foreground transition-colors">Terms</a>
-            <a href="#" className="hover:text-primary-foreground transition-colors">Cookies</a>
+            <a
+              href="#"
+              className="hover:text-primary-foreground transition-colors"
+            >
+              {t.footer.privacy}
+            </a>
+            <a
+              href="#"
+              className="hover:text-primary-foreground transition-colors"
+            >
+              {t.footer.terms}
+            </a>
+            <a
+              href="#"
+              className="hover:text-primary-foreground transition-colors"
+            >
+              {t.footer.cookies}
+            </a>
           </div>
         </div>
       </div>
