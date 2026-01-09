@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import destBali from "@/assets/dest-bali.jpg";
 import destSwitzerland from "@/assets/dest-switzerland.jpg";
@@ -14,6 +14,12 @@ const CircularGallery = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [rotation, setRotation] = useState(0);
   const [isAutoRotating, setIsAutoRotating] = useState(true);
+  const swipeState = useRef<{
+    pointerId: number | null;
+    startX: number;
+    startY: number;
+    hasSwiped: boolean;
+  }>({ pointerId: null, startX: 0, startY: 0, hasSwiped: false });
 
   const destinations = [
     {
@@ -134,8 +140,63 @@ const CircularGallery = () => {
     return () => clearInterval(interval);
   }, [isAutoRotating, angleStep, totalItems]);
 
+  const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    swipeState.current.pointerId = event.pointerId;
+    swipeState.current.startX = event.clientX;
+    swipeState.current.startY = event.clientY;
+    swipeState.current.hasSwiped = false;
+
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      // ignore
+    }
+  };
+
+  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (swipeState.current.pointerId !== event.pointerId) return;
+    if (swipeState.current.hasSwiped) return;
+
+    const dx = event.clientX - swipeState.current.startX;
+    const dy = event.clientY - swipeState.current.startY;
+
+    // If the user is primarily scrolling vertically, don't hijack.
+    if (Math.abs(dy) > Math.abs(dx)) return;
+
+    const swipeThresholdPx = 40;
+    if (Math.abs(dx) < swipeThresholdPx) return;
+
+    swipeState.current.hasSwiped = true;
+    setIsAutoRotating(false);
+
+    if (dx < 0) {
+      nextSlide();
+    } else {
+      prevSlide();
+    }
+  };
+
+  const onPointerUpOrCancel = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (swipeState.current.pointerId !== event.pointerId) return;
+
+    swipeState.current.pointerId = null;
+    swipeState.current.hasSwiped = false;
+
+    try {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    } catch {
+      // ignore
+    }
+  };
+
   return (
-    <div className="relative w-full min-h-[700px] flex items-center justify-center py-12">
+    <div
+      className="relative w-full min-h-[700px] flex items-center justify-center py-12 touch-pan-y"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUpOrCancel}
+      onPointerCancel={onPointerUpOrCancel}
+    >
       {/* Center Info Card */}
       <div className="absolute z-20 bg-card/95 backdrop-blur-md rounded-2xl p-8 shadow-elevated max-w-md border border-border">
         <div className="flex items-center justify-center gap-2 mb-3">
@@ -207,20 +268,20 @@ const CircularGallery = () => {
         variant="outline"
         size="icon"
         onClick={prevSlide}
-        className="absolute left-4 md:left-12 top-1/2 -translate-y-1/2 z-20 rounded-full w-12 h-12 shadow-lg"
+        className="hidden md:inline-flex absolute left-4 md:left-12 top-1/2 -translate-y-1/2 z-20 rounded-full w-12 h-12 shadow-lg"
         aria-label="Previous destination"
       >
-        <ChevronLeft className="h-6 w-6" />
+        <ChevronLeft className="h-4 w-4 md:h-4 md:w-4" />
       </Button>
 
       <Button
         variant="outline"
         size="icon"
         onClick={nextSlide}
-        className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-20 rounded-full w-12 h-12 shadow-lg"
+        className="hidden md:inline-flex absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-20 rounded-full w-12 h-12 shadow-lg"
         aria-label="Next destination"
       >
-        <ChevronRight className="h-6 w-6" />
+        <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
       </Button>
 
       {/* Navigation Dots */}
