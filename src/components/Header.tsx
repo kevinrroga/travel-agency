@@ -4,6 +4,7 @@ import { Menu, X, MapPin, Phone } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { translations } from "@/translations";
 import LanguageSwitcher from "./LanguageSwitcher";
+import ViewTransitionLink from "@/components/ViewTransitionLink";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,9 +12,17 @@ const Header = () => {
   const t = translations[language];
 
   const navLinks = [
-    { name: t.header.destinations, href: "#destinations" },
-    { name: t.header.accomodation, href: "#accomodation" },
-    { name: t.header.contact, href: "#contact" },
+    {
+      name: t.header.destinations,
+      href: "#destinations",
+      type: "anchor" as const,
+    },
+    {
+      name: t.header.accomodation,
+      href: "/accommodation",
+      type: "link" as const,
+    },
+    { name: t.header.contact, href: "#contact", type: "anchor" as const },
   ];
 
   return (
@@ -21,35 +30,38 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2">
+          <ViewTransitionLink to="/" className="flex items-center gap-2">
             <MapPin className="h-8 w-8 text-primary" />
             <span className="font-display text-2xl font-semibold text-foreground">
               Arlin Travel&amp;Tours
             </span>
-          </a>
+          </ViewTransitionLink>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors duration-300 font-medium"
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.type === "link" ? (
+                <ViewTransitionLink
+                  key={link.name}
+                  to={link.href}
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-300 font-medium"
+                >
+                  {link.name}
+                </ViewTransitionLink>
+              ) : (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-300 font-medium"
+                >
+                  {link.name}
+                </a>
+              )
+            )}
           </nav>
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            <a
-              href="tel:+1234567890"
-              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Phone className="h-4 w-4" />
-              <span className="text-sm font-medium">{t.header.phone}</span>
-            </a>
             <LanguageSwitcher />
             <Button variant="default" size="lg">
               {t.header.planTrip}
@@ -74,16 +86,27 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden py-6 border-t border-border animate-fade-in">
             <nav className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-foreground font-medium py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.name}
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                link.type === "link" ? (
+                  <ViewTransitionLink
+                    key={link.name}
+                    to={link.href}
+                    className="text-foreground font-medium py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.name}
+                  </ViewTransitionLink>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="text-foreground font-medium py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                )
+              )}
               <LanguageSwitcher />
               <Button variant="default" size="lg" className="mt-4">
                 {t.header.planTrip}

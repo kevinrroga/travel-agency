@@ -44,6 +44,54 @@ const CircularGallery = () => {
       price: `${t.destinations.from} $1,199`,
       duration: `6 ${t.destinations.days}`,
     },
+    {
+      name: t.destinations.paris,
+      description: t.destinations.parisDesc,
+      image:
+        "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop",
+      price: `${t.destinations.from} $1,799`,
+      duration: `5 ${t.destinations.days}`,
+    },
+    {
+      name: t.destinations.rome,
+      description: t.destinations.romeDesc,
+      image:
+        "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&h=600&fit=crop",
+      price: `${t.destinations.from} $1,599`,
+      duration: `6 ${t.destinations.days}`,
+    },
+    {
+      name: t.destinations.munich,
+      description: t.destinations.munichDesc,
+      image:
+        "https://images.unsplash.com/photo-1595867818082-083862f3d630?w=800&h=600&fit=crop",
+      price: `${t.destinations.from} $1,499`,
+      duration: `5 ${t.destinations.days}`,
+    },
+    {
+      name: t.destinations.madrid,
+      description: t.destinations.madridDesc,
+      image:
+        "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&h=600&fit=crop",
+      price: `${t.destinations.from} $1,399`,
+      duration: `5 ${t.destinations.days}`,
+    },
+    {
+      name: t.destinations.athens,
+      description: t.destinations.athensDesc,
+      image:
+        "https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&h=600&fit=crop",
+      price: `${t.destinations.from} $1,299`,
+      duration: `6 ${t.destinations.days}`,
+    },
+    {
+      name: t.destinations.london,
+      description: t.destinations.londonDesc,
+      image:
+        "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&h=600&fit=crop",
+      price: `${t.destinations.from} $1,899`,
+      duration: `5 ${t.destinations.days}`,
+    },
   ];
 
   const totalItems = destinations.length;
@@ -176,7 +224,7 @@ const CircularGallery = () => {
       </Button>
 
       {/* Navigation Dots */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+      <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
         {destinations.map((_, index) => (
           <button
             key={index}

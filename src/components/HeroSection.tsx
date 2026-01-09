@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/hero-santorini.jpg";
+import type { CSSProperties } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { translations } from "@/translations";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,10 @@ const HeroSection = () => {
   const { language } = useLanguage();
   const t = translations[language];
 
+  const heroMediaStyle = {
+    ["viewTransitionName" as never]: "hero-media",
+  } as CSSProperties;
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -17,6 +22,7 @@ const HeroSection = () => {
           src={heroImage}
           alt="Santorini at sunset"
           className="w-full h-full object-cover"
+          style={heroMediaStyle}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/60 via-foreground/40 to-foreground/70" />
       </div>
