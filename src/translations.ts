@@ -3,7 +3,7 @@ export const translations = {
     header: {
       destinations: "Destinations",
       
-      about: "About",
+      accomodation: "Accomodation",
       contact: "Contact",
       phone: "+1 (234) 567-890",
       planTrip: "Plan Your Trip"
@@ -66,7 +66,7 @@ export const translations = {
       africa: "Africa",
       oceania: "Oceania",
       companyTitle: "Company",
-      aboutUs: "About Us",
+      accomodation: "Accomodation",
       ourTeam: "Our Team",
       careers: "Careers",
       press: "Press",
@@ -83,7 +83,7 @@ export const translations = {
     header: {
       destinations: "Destinacionet",
       
-      about: "Rreth Nesh",
+      accomodation: "Akomodim",
       contact: "Kontakt",
       phone: "+1 (234) 567-890",
       planTrip: "Planifikoni Udhëtimin"
@@ -146,7 +146,7 @@ export const translations = {
       africa: "Afrika",
       oceania: "Oqeania",
       companyTitle: "Kompania",
-      aboutUs: "Rreth Nesh",
+      accomodation: "Akomodimi",
       ourTeam: "Ekipi Ynë",
       careers: "Karriera",
       press: "Shtypi",

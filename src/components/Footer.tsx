@@ -29,7 +29,7 @@ const Footer = () => {
       { name: t.footer.oceania, href: "#" },
     ],
     company: [
-      { name: t.footer.aboutUs, href: "#about" },
+      { name: t.footer.accomodation, href: "#accomodation" },
       { name: t.footer.ourTeam, href: "#" },
       { name: t.footer.careers, href: "#" },
       { name: t.footer.press, href: "#" },

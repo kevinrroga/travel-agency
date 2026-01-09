@@ -12,7 +12,7 @@ const Header = () => {
 
   const navLinks = [
     { name: t.header.destinations, href: "#destinations" },
-    { name: t.header.about, href: "#about" },
+    { name: t.header.accomodation, href: "#accomodation" },
     { name: t.header.contact, href: "#contact" },
   ];
 
