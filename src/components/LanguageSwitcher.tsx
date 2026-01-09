@@ -11,7 +11,7 @@ const LanguageSwitcher = () => {
   return (
     <Button
       onClick={toggleLanguage}
-      variant="outline"
+      variant="ghost"
       size="sm"
       className="px-2 py-1 h-8 text-xs font-semibold"
       aria-label={`Switch to ${language === "en" ? "Albanian" : "English"}`}
