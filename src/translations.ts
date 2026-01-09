@@ -10,6 +10,7 @@ export const translations = {
     },
     hero: {
       badge: "Discover 50+ Curated Destinations",
+      typewriterText: "Journey Beyond The Ordinary",
       title: "Journey Beyond",
       titleAccent: "The Ordinary",
       subtitle: "Bespoke travel experiences crafted for the curious soul. From hidden gems to iconic wonders, your adventure awaits.",
@@ -80,6 +81,7 @@ export const translations = {
     },
     hero: {
       badge: "Zbuloni 50+ Destinacione të Përzgjedhura",
+      typewriterText: "Udhëtim Përtej Të Zakonshmes",
       title: "Udhëtim Përtej",
       titleAccent: "Të Zakonshmes",
       subtitle: "Përvoja udhëtimi të personalizuara të krijuara për shpirtrat kuriozë. Nga thesare të fshehura deri tek mrekulli ikonike, aventura juaj ju pret.",

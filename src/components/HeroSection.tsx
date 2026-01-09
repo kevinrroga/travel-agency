@@ -3,6 +3,7 @@ import heroImage from "@/assets/hero-santorini.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { translations } from "@/translations";
 import { Button } from "@/components/ui/button";
+import TypewriterText from "@/components/TypewriterText";
 
 const HeroSection = () => {
   const { language } = useLanguage();
@@ -23,6 +24,15 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-12 container mx-auto px-6 pt-20">
         <div className="max-w-4xl mx-auto text-center">
+          {/* Typewriter Text */}
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-8">
+            <TypewriterText
+              text={t.hero.typewriterText}
+              typingSpeed={100}
+              showCursor={false}
+              cursorCharacter="|"
+            />
+          </h1>
           {/* Animated Moving Border Button */}
           <Button variant="hero">Shadow</Button>
         </div>
