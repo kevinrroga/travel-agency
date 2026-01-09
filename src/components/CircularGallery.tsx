@@ -7,10 +7,12 @@ import destMorocco from "@/assets/dest-morocco.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { translations } from "@/translations";
 import { Button } from "./ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const CircularGallery = () => {
   const { language } = useLanguage();
   const t = translations[language];
+  const isMobile = useIsMobile();
   const [activeIndex, setActiveIndex] = useState(0);
   const [rotation, setRotation] = useState(0);
   const [isAutoRotating, setIsAutoRotating] = useState(true);
@@ -141,19 +143,18 @@ const CircularGallery = () => {
   }, [isAutoRotating, angleStep, totalItems]);
 
   const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!isMobile) return;
+    if (event.pointerType !== "touch") return;
+
     swipeState.current.pointerId = event.pointerId;
     swipeState.current.startX = event.clientX;
     swipeState.current.startY = event.clientY;
     swipeState.current.hasSwiped = false;
-
-    try {
-      event.currentTarget.setPointerCapture(event.pointerId);
-    } catch {
-      // ignore
-    }
   };
 
   const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!isMobile) return;
+    if (event.pointerType !== "touch") return;
     if (swipeState.current.pointerId !== event.pointerId) return;
     if (swipeState.current.hasSwiped) return;
 
@@ -177,25 +178,23 @@ const CircularGallery = () => {
   };
 
   const onPointerUpOrCancel = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!isMobile) return;
+    if (event.pointerType !== "touch") return;
     if (swipeState.current.pointerId !== event.pointerId) return;
 
     swipeState.current.pointerId = null;
     swipeState.current.hasSwiped = false;
-
-    try {
-      event.currentTarget.releasePointerCapture(event.pointerId);
-    } catch {
-      // ignore
-    }
   };
 
   return (
     <div
-      className="relative w-full min-h-[700px] flex items-center justify-center py-12 touch-pan-y"
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUpOrCancel}
-      onPointerCancel={onPointerUpOrCancel}
+      className={`relative w-full min-h-[700px] flex items-center justify-center py-12 ${
+        isMobile ? "touch-pan-y" : ""
+      }`}
+      onPointerDown={isMobile ? onPointerDown : undefined}
+      onPointerMove={isMobile ? onPointerMove : undefined}
+      onPointerUp={isMobile ? onPointerUpOrCancel : undefined}
+      onPointerCancel={isMobile ? onPointerUpOrCancel : undefined}
     >
       {/* Center Info Card */}
       <div className="absolute z-20 bg-card/95 backdrop-blur-md rounded-2xl p-8 shadow-elevated max-w-md border border-border">
