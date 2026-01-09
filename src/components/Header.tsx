@@ -18,7 +18,7 @@ const Header = () => {
       type: "anchor" as const,
     },
     {
-      name: t.header.accomodation,
+      name: t.header.accommodation,
       href: "/accommodation",
       type: "link" as const,
     },

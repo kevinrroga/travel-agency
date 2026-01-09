@@ -28,18 +28,6 @@ const Footer = () => {
       { name: t.footer.africa, href: "#" },
       { name: t.footer.oceania, href: "#" },
     ],
-    company: [
-      { name: t.footer.accomodation, href: "#accomodation" },
-      { name: t.footer.ourTeam, href: "#" },
-      { name: t.footer.careers, href: "#" },
-      { name: t.footer.press, href: "#" },
-      { name: t.footer.partners, href: "#" },
-    ],
-    support: [
-      { name: t.footer.contact, href: "#contact" },
-      { name: t.footer.faq, href: "#" },
-      { name: t.footer.insurance, href: "#" },
-    ],
   };
 
   return (

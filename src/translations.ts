@@ -3,7 +3,7 @@ export const translations = {
     header: {
       destinations: "Destinations",
       
-      accomodation: "Accomodation",
+      accommodation: "Accommodation",
       contact: "Contact",
       phone: "+1 (234) 567-890",
       planTrip: "Plan Your Trip"
@@ -86,7 +86,7 @@ export const translations = {
     header: {
       destinations: "Destinacionet",
       
-      accomodation: "Akomodim",
+      accommodation: "Akomodim",
       contact: "Kontakt",
       phone: "+1 (234) 567-890",
       planTrip: "Planifikoni Udhëtimin"
