@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, MapPin, Phone } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -8,8 +9,34 @@ import ViewTransitionLink from "@/components/ViewTransitionLink";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
+  const location = useLocation();
   const { language } = useLanguage();
   const t = translations[language];
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const onPointerDown = (event: PointerEvent) => {
+      const menuEl = mobileMenuRef.current;
+      if (!menuEl) return;
+
+      const targetNode = event.target as Node | null;
+      if (!targetNode) return;
+
+      // If the click/tap is outside the menu panel, close it.
+      if (!menuEl.contains(targetNode)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", onPointerDown, { capture: true });
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown, {
+        capture: true,
+      } as AddEventListenerOptions);
+    };
+  }, [isMenuOpen]);
 
   const navLinks = [
     {
@@ -41,13 +68,23 @@ const Header = () => {
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) =>
               link.type === "link" ? (
-                <ViewTransitionLink
-                  key={link.name}
-                  to={link.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-300 font-medium"
-                >
-                  {link.name}
-                </ViewTransitionLink>
+                (() => {
+                  const isActive = location.pathname === link.href;
+
+                  return (
+                    <ViewTransitionLink
+                      key={link.name}
+                      to={link.href}
+                      className={`transition-colors duration-300 font-medium hover:text-foreground ${
+                        isActive
+                          ? "text-foreground underline underline-offset-8 decoration-primary"
+                          : "text-muted-foreground"
+                      }`}
+                    >
+                      {link.name}
+                    </ViewTransitionLink>
+                  );
+                })()
               ) : (
                 <a
                   key={link.name}
@@ -84,35 +121,60 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-6 border-t border-border animate-fade-in">
-            <nav className="flex flex-col gap-4">
-              {navLinks.map((link) =>
-                link.type === "link" ? (
-                  <ViewTransitionLink
-                    key={link.name}
-                    to={link.href}
-                    className="text-foreground font-medium py-2"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.name}
-                  </ViewTransitionLink>
-                ) : (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="text-foreground font-medium py-2"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.name}
-                  </a>
-                )
-              )}
-              <LanguageSwitcher />
-              <Button variant="default" size="lg" className="mt-4">
-                {t.header.planTrip}
-              </Button>
-            </nav>
-          </div>
+          <>
+            {/* Backdrop: click to close */}
+            <div
+              className="md:hidden fixed inset-0 top-20 z-40 bg-foreground/10 pointer-events-auto"
+              aria-hidden="true"
+              onPointerDown={() => setIsMenuOpen(false)}
+            />
+
+            {/* Menu panel */}
+            <div
+              ref={mobileMenuRef}
+              className="md:hidden fixed left-0 right-0 top-20 z-50 border-t border-border animate-fade-in bg-background/95 backdrop-blur-md"
+            >
+              <div className="container mx-auto px-6 py-6">
+                <nav className="flex flex-col gap-4">
+                  {navLinks.map((link) =>
+                    link.type === "link" ? (
+                      (() => {
+                        const isActive = location.pathname === link.href;
+
+                        return (
+                          <ViewTransitionLink
+                            key={link.name}
+                            to={link.href}
+                            className={`font-medium py-2 ${
+                              isActive
+                                ? "text-foreground underline underline-offset-8 decoration-primary"
+                                : "text-foreground"
+                            }`}
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            {link.name}
+                          </ViewTransitionLink>
+                        );
+                      })()
+                    ) : (
+                      <a
+                        key={link.name}
+                        href={link.href}
+                        className="text-foreground font-medium py-2"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {link.name}
+                      </a>
+                    )
+                  )}
+                  <LanguageSwitcher />
+                  <Button variant="default" size="lg" className="mt-4">
+                    {t.header.planTrip}
+                  </Button>
+                </nav>
+              </div>
+            </div>
+          </>
         )}
       </div>
     </header>

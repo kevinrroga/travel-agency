@@ -1,4 +1,4 @@
-import { MapPin, Instagram, Facebook} from "lucide-react";
+import { MapPin, Instagram, Facebook } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { translations } from "@/translations";
 
@@ -13,7 +13,7 @@ const socialLinks = [
     icon: Facebook,
     href: "https://www.facebook.com/p/Arlin-Travel-and-Tour-Agency-61553088734617/",
     label: "Facebook",
-  }
+  },
 ];
 
 const Footer = () => {
@@ -80,38 +80,6 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-
-          <div>
-            <h4 className="font-semibold mb-4">{t.footer.companyTitle}</h4>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4">{t.footer.supportTitle}</h4>
-            <ul className="space-y-3">
-              {footerLinks.support.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
 
         {/* Bottom Bar */}
@@ -119,8 +87,7 @@ const Footer = () => {
           <p className="text-primary-foreground/60 text-sm">
             {t.footer.copyright}
           </p>
-          <div className="flex gap-6 text-sm text-primary-foreground/60">
-          </div>
+          <div className="flex gap-6 text-sm text-primary-foreground/60"></div>
         </div>
       </div>
     </footer>
