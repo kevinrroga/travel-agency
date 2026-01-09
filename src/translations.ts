@@ -76,11 +76,7 @@ export const translations = {
       faq: "FAQ",
       insurance: "Travel Insurance",
       bookingTerms: "Booking Terms",
-      privacyPolicy: "Privacy Policy",
       copyright: "© 2025 Wanderlust Travel. All rights reserved.",
-      privacy: "Privacy",
-      terms: "Terms",
-      cookies: "Cookies"
     }
   },
   al: {
@@ -160,11 +156,7 @@ export const translations = {
       faq: "Pyetje të Shpeshta",
       insurance: "Sigurimi i Udhëtimit",
       bookingTerms: "Kushtet e Rezervimit",
-      privacyPolicy: "Politika e Privatësisë",
-      copyright: "© 2025 Wanderlust Travel. Të gjitha të drejtat e rezervuara.",
-      privacy: "Privatësia",
-      terms: "Kushtet",
-      cookies: "Cookies"
+      copyright: "© 2025 Arlin Travel&Tours. Të gjitha të drejtat e rezervuara."
     }
   }
 } as const;

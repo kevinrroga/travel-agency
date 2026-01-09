@@ -24,7 +24,7 @@ const Header = () => {
           <a href="/" className="flex items-center gap-2">
             <MapPin className="h-8 w-8 text-primary" />
             <span className="font-display text-2xl font-semibold text-foreground">
-              Wanderlust
+              Arlin Travel&amp;Tours
             </span>
           </a>
 
