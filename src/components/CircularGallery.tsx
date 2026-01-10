@@ -209,7 +209,7 @@ const CircularGallery = () => {
 
   return (
     <div
-      className={`relative w-full min-h-[700px] flex items-center justify-center py-12 ${
+      className={`relative w-full min-h-[560px] md:min-h-[700px] flex items-center justify-center py-10 md:py-12 ${
         isMobile ? "touch-pan-y" : ""
       }`}
       onPointerDown={isMobile ? onPointerDown : undefined}
@@ -218,31 +218,31 @@ const CircularGallery = () => {
       onPointerCancel={isMobile ? onPointerUpOrCancel : undefined}
     >
       {/* Center Info Card */}
-      <div className="absolute z-20 bg-card/95 backdrop-blur-md rounded-2xl p-8 shadow-elevated max-w-md border border-border">
-        <div className="flex items-center justify-center gap-2 mb-3">
-          <span className="text-accent text-sm font-medium">
+      <div className="absolute z-20 bg-card/95 backdrop-blur-md rounded-2xl p-3 sm:p-4 md:p-8 shadow-elevated max-w-[13.5rem] sm:max-w-[16.5rem] md:max-w-md border border-border">
+        <div className="flex items-center justify-center gap-2 mb-2 md:mb-3">
+          <span className="text-accent text-xs sm:text-sm font-medium">
             {destinations[activeIndex].duration}
           </span>
           <span className="text-muted-foreground">•</span>
-          <span className="text-muted-foreground text-sm">
+          <span className="text-muted-foreground text-xs sm:text-sm">
             {destinations[activeIndex].price}
           </span>
         </div>
 
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center mb-3 md:mb-4">
           <DestinationWeatherBadge
             latitude={destinations[activeIndex].latitude}
             longitude={destinations[activeIndex].longitude}
           />
         </div>
 
-        <h3 className="font-display text-3xl font-bold text-foreground mb-3 text-center">
+        <h3 className="font-display text-lg sm:text-xl md:text-3xl font-bold text-foreground mb-2 md:mb-3 text-center">
           {destinations[activeIndex].name}
         </h3>
-        <p className="text-muted-foreground mb-6 text-center">
+        <p className="text-muted-foreground mb-3 md:mb-6 text-center text-xs sm:text-sm md:text-base">
           {destinations[activeIndex].description}
         </p>
-        <Button className="w-full gap-2" size="lg">
+        <Button className="w-full gap-2" size={isMobile ? "sm" : "lg"}>
           <span>{t.destinations.explore}</span>
           <ArrowUpRight className="h-4 w-4" />
         </Button>
@@ -250,12 +250,12 @@ const CircularGallery = () => {
 
       {/* Circular Gallery */}
       <div
-        className="relative w-[600px] h-[600px] transition-transform duration-1000 ease-in-out"
+        className="relative w-[340px] h-[340px] sm:w-[380px] sm:h-[380px] md:w-[600px] md:h-[600px] transition-transform duration-1000 ease-in-out"
         style={{ transform: `rotate(${rotation}deg)` }}
       >
         {destinations.map((dest, index) => {
           const angle = index * angleStep;
-          const radius = 280;
+          const radius = isMobile ? 125 : 280;
           const x = Math.cos((angle - 90) * (Math.PI / 180)) * radius;
           const y = Math.sin((angle - 90) * (Math.PI / 180)) * radius;
           const isActive = index === activeIndex;
@@ -267,7 +267,7 @@ const CircularGallery = () => {
               className="absolute top-1/2 left-1/2 transition-all duration-1000 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-2xl"
               style={{
                 transform: `translate(-50%, -50%) translate(${x}px, ${y}px) rotate(${-rotation}deg) scale(${
-                  isActive ? 1.2 : 0.8
+                  isActive ? (isMobile ? 1.12 : 1.2) : isMobile ? 0.78 : 0.8
                 })`,
                 zIndex: isActive ? 10 : 5,
               }}
@@ -283,7 +283,7 @@ const CircularGallery = () => {
                 <img
                   src={dest.image}
                   alt={dest.name}
-                  className="w-40 h-52 object-cover"
+                  className="w-20 h-28 sm:w-24 sm:h-32 md:w-40 md:h-52 object-cover"
                 />
               </div>
             </button>
@@ -313,7 +313,7 @@ const CircularGallery = () => {
       </Button>
 
       {/* Navigation Dots */}
-      <div className="absolute -bottom-10 md:-bottom-12 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+      <div className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 flex gap-2 z-20">
         {destinations.map((_, index) => (
           <button
             key={index}

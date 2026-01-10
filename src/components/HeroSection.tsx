@@ -49,7 +49,7 @@ const HeroSection = () => {
             />
           </h1>
           {/* Animated Moving Border Button */}
-          <Button variant="hero">Shadow</Button>
+          <Button variant="hero">Explore</Button>
         </div>
       </div>
     </section>

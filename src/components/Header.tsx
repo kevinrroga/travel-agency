@@ -161,7 +161,7 @@ const Header = () => {
           <>
             {/* Backdrop: click to close */}
             <div
-              className="md:hidden fixed inset-0 top-20 z-40 bg-foreground/10 pointer-events-auto"
+              className="md:hidden fixed inset-0 top-20 z-40 bg-foreground/25 backdrop-blur-[2px] pointer-events-auto"
               aria-hidden="true"
               onPointerDown={() => setIsMenuOpen(false)}
             />
@@ -169,10 +169,10 @@ const Header = () => {
             {/* Menu panel */}
             <div
               ref={mobileMenuRef}
-              className="md:hidden fixed left-0 right-0 top-20 z-50 border-t border-border animate-fade-in bg-background/95 backdrop-blur-md"
+              className="md:hidden fixed left-0 right-0 top-20 z-50 border-t border-border/60 bg-background/90 backdrop-blur-xl shadow-elevated rounded-b-2xl ring-1 ring-border/50 animate-sheet-down max-h-[calc(100vh-5rem)] overflow-auto"
             >
-              <div className="container mx-auto px-6 py-6">
-                <nav className="flex flex-col gap-4">
+              <div className="container mx-auto px-5 py-4">
+                <nav className="flex flex-col gap-3">
                   {navLinks.map((link) =>
                     link.type === "link" ? (
                       (() => {
@@ -182,7 +182,7 @@ const Header = () => {
                           <ViewTransitionLink
                             key={link.name}
                             to={link.href}
-                            className={`font-medium py-2 ${
+                            className={`font-medium py-1.5 text-[15px] ${
                               isActive
                                 ? "text-foreground underline underline-offset-8 decoration-primary"
                                 : "text-foreground"
@@ -197,7 +197,7 @@ const Header = () => {
                       <a
                         key={link.name}
                         href={link.href}
-                        className="text-foreground font-medium py-2"
+                        className="text-foreground font-medium py-1.5 text-[15px]"
                         onClick={(e) => handleAnchorClick(e, link.href)}
                       >
                         {link.name}
@@ -205,7 +205,11 @@ const Header = () => {
                     )
                   )}
                   <LanguageSwitcher />
-                  <Button variant="default" size="lg" className="mt-4">
+                  <Button
+                    variant="default"
+                    size="default"
+                    className="mt-3 w-full"
+                  >
                     {t.header.planTrip}
                   </Button>
                 </nav>
