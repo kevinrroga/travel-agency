@@ -58,7 +58,7 @@ export const translations = {
       luxuryTitle: "Luxury Redefined",
       luxuryDesc: "From boutique hideaways to world-class resorts, we partner with the finest establishments worldwide.",
       seamlessTitle: "Seamless Journey",
-      seamlessDesc: "Travel worry-free with 24/7 concierge support, flexible bookings, and comprehensive travel protection.",
+      seamlessDesc: "Travel worry-free with 24/7 support, flexible bookings, and comprehensive travel protection.",
       personalTitle: "Personal Touch",
       personalDesc: "Every itinerary is tailored to your dreams. Tell us your vision, and we'll craft the perfect adventure."
     },
@@ -141,7 +141,7 @@ export const translations = {
       luxuryTitle: "Luksi i Ridefinuar",
       luxuryDesc: "Nga strehime butike deri tek resortet me klasë botërore, bashkëpunojmë me institucionet më të mira në mbarë botën.",
       seamlessTitle: "Udhëtim i Pandërprerë",
-      seamlessDesc: "Udhëtoni pa shqetësime me mbështetje concierge 24/7, rezervime fleksibël dhe mbrojtje gjithëpërfshirëse të udhëtimit.",
+      seamlessDesc: "Udhëtoni pa shqetësime me mbështetje 24/7, rezervime fleksibël dhe mbrojtje gjithëpërfshirëse të udhëtimit.",
       personalTitle: "Prekje Personale",
       personalDesc: "Çdo itinerar është i përshtatur për ëndrrat tuaja. Na tregoni vizionin tuaj, dhe ne do të krijojmë aventurën perfekte."
     },

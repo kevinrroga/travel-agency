@@ -7,7 +7,7 @@ const DestinationsSection = () => {
   const t = translations[language];
 
   return (
-    <section id="destinations" className="py-24 bg-background">
+    <section id="destinations" className="py-24 bg-background scroll-mt-24">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="max-w-2xl mb-16">

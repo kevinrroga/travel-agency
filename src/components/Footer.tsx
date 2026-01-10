@@ -33,7 +33,7 @@ const Footer = () => {
   return (
     <footer
       id="contact"
-      className="bg-foreground text-primary-foreground py-16"
+      className="bg-foreground text-primary-foreground py-16 scroll-mt-24"
     >
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">

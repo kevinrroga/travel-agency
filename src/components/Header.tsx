@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, MapPin, Phone } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -11,8 +11,44 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
+
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    const headerOffset = 80 + 12; // header height + breathing room
+    const y = el.getBoundingClientRect().top + window.scrollY - headerOffset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+
+    el.classList.remove("section-flash");
+    // restart animation
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    el.offsetHeight;
+    el.classList.add("section-flash");
+    window.setTimeout(() => el.classList.remove("section-flash"), 900);
+  };
+
+  const handleAnchorClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (!href.startsWith("#")) return;
+    event.preventDefault();
+    setIsMenuOpen(false);
+
+    const id = href.slice(1);
+
+    // If we are not on home, navigate to home with hash; AppLayout will handle scrolling.
+    if (location.pathname !== "/") {
+      navigate(`/#${id}`);
+      return;
+    }
+
+    scrollToSection(id);
+  };
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -90,6 +126,7 @@ const Header = () => {
                   key={link.name}
                   href={link.href}
                   className="text-muted-foreground hover:text-foreground transition-colors duration-300 font-medium"
+                  onClick={(e) => handleAnchorClick(e, link.href)}
                 >
                   {link.name}
                 </a>
@@ -161,7 +198,7 @@ const Header = () => {
                         key={link.name}
                         href={link.href}
                         className="text-foreground font-medium py-2"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={(e) => handleAnchorClick(e, link.href)}
                       >
                         {link.name}
                       </a>
