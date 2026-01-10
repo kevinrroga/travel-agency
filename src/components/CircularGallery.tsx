@@ -8,6 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { translations } from "@/translations";
 import { Button } from "./ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+import DestinationWeatherBadge from "@/components/DestinationWeatherBadge";
 
 const CircularGallery = () => {
   const { language } = useLanguage();
@@ -28,6 +29,8 @@ const CircularGallery = () => {
       name: t.destinations.bali,
       description: t.destinations.baliDesc,
       image: destBali,
+      latitude: -8.4095,
+      longitude: 115.1889,
       price: `${t.destinations.from} $1,299`,
       duration: `7 ${t.destinations.days}`,
     },
@@ -35,6 +38,8 @@ const CircularGallery = () => {
       name: t.destinations.swissAlps,
       description: t.destinations.swissDesc,
       image: destSwitzerland,
+      latitude: 46.6863,
+      longitude: 7.8632,
       price: `${t.destinations.from} $2,499`,
       duration: `10 ${t.destinations.days}`,
     },
@@ -42,6 +47,8 @@ const CircularGallery = () => {
       name: t.destinations.kyoto,
       description: t.destinations.kyotoDesc,
       image: destJapan,
+      latitude: 35.0116,
+      longitude: 135.7681,
       price: `${t.destinations.from} $1,899`,
       duration: `8 ${t.destinations.days}`,
     },
@@ -49,6 +56,8 @@ const CircularGallery = () => {
       name: t.destinations.marrakech,
       description: t.destinations.marrakechDesc,
       image: destMorocco,
+      latitude: 31.6295,
+      longitude: -7.9811,
       price: `${t.destinations.from} $1,199`,
       duration: `6 ${t.destinations.days}`,
     },
@@ -57,6 +66,8 @@ const CircularGallery = () => {
       description: t.destinations.parisDesc,
       image:
         "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop",
+      latitude: 48.8566,
+      longitude: 2.3522,
       price: `${t.destinations.from} $1,799`,
       duration: `5 ${t.destinations.days}`,
     },
@@ -65,6 +76,8 @@ const CircularGallery = () => {
       description: t.destinations.romeDesc,
       image:
         "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&h=600&fit=crop",
+      latitude: 41.9028,
+      longitude: 12.4964,
       price: `${t.destinations.from} $1,599`,
       duration: `6 ${t.destinations.days}`,
     },
@@ -73,6 +86,8 @@ const CircularGallery = () => {
       description: t.destinations.munichDesc,
       image:
         "https://images.unsplash.com/photo-1595867818082-083862f3d630?w=800&h=600&fit=crop",
+      latitude: 48.1351,
+      longitude: 11.582,
       price: `${t.destinations.from} $1,499`,
       duration: `5 ${t.destinations.days}`,
     },
@@ -81,6 +96,8 @@ const CircularGallery = () => {
       description: t.destinations.madridDesc,
       image:
         "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&h=600&fit=crop",
+      latitude: 40.4168,
+      longitude: -3.7038,
       price: `${t.destinations.from} $1,399`,
       duration: `5 ${t.destinations.days}`,
     },
@@ -89,6 +106,8 @@ const CircularGallery = () => {
       description: t.destinations.athensDesc,
       image:
         "https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&h=600&fit=crop",
+      latitude: 37.9838,
+      longitude: 23.7275,
       price: `${t.destinations.from} $1,299`,
       duration: `6 ${t.destinations.days}`,
     },
@@ -97,6 +116,8 @@ const CircularGallery = () => {
       description: t.destinations.londonDesc,
       image:
         "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&h=600&fit=crop",
+      latitude: 51.5074,
+      longitude: -0.1278,
       price: `${t.destinations.from} $1,899`,
       duration: `5 ${t.destinations.days}`,
     },
@@ -207,6 +228,14 @@ const CircularGallery = () => {
             {destinations[activeIndex].price}
           </span>
         </div>
+
+        <div className="flex justify-center mb-4">
+          <DestinationWeatherBadge
+            latitude={destinations[activeIndex].latitude}
+            longitude={destinations[activeIndex].longitude}
+          />
+        </div>
+
         <h3 className="font-display text-3xl font-bold text-foreground mb-3 text-center">
           {destinations[activeIndex].name}
         </h3>

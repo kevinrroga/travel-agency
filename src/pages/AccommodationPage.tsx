@@ -1,11 +1,24 @@
+import WeatherWidget from "@/components/WeatherWidget";
+
 const AccommodationPage = () => {
   return (
     <main>
       {/* Hero Section with Images */}
       <section className="container mx-auto px-6 py-8">
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
-          Luxury Apartment in Santorini
-        </h1>
+        <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+          <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground">
+            Luxury Apartment in Santorini
+          </h1>
+
+          <div className="w-full md:max-w-sm">
+            <WeatherWidget
+              title="Oia weather"
+              latitude={36.4613}
+              longitude={25.3753}
+              compact
+            />
+          </div>
+        </div>
 
         {/* Image Gallery Placeholder */}
         <div className="grid grid-cols-4 grid-rows-2 gap-2 h-[500px] rounded-2xl overflow-hidden">

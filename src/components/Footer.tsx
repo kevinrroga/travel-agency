@@ -21,13 +21,7 @@ const Footer = () => {
   const t = translations[language];
 
   const footerLinks = {
-    destinations: [
-      { name: t.footer.europe, href: "#" },
-      { name: t.footer.asia, href: "#" },
-      { name: t.footer.americas, href: "#" },
-      { name: t.footer.africa, href: "#" },
-      { name: t.footer.oceania, href: "#" },
-    ],
+    
   };
 
   return (
@@ -65,21 +59,6 @@ const Footer = () => {
           </div>
 
           {/* Links */}
-          <div>
-            <h4 className="font-semibold mb-4">{t.footer.destinationsTitle}</h4>
-            <ul className="space-y-3">
-              {footerLinks.destinations.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
 
         {/* Bottom Bar */}

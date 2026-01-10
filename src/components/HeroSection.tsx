@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/hero-santorini.jpg";
+import heroVideo from "@/assets/aiVideo1.mp4";
 import type { CSSProperties } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { translations } from "@/translations";
@@ -16,14 +17,22 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background Video */}
       <div className="absolute inset-0">
-        <img
-          src={heroImage}
-          alt="Santorini at sunset"
+        <video
           className="w-full h-full object-cover"
           style={heroMediaStyle}
-        />
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={heroImage}
+          aria-label="Hero background video"
+          disablePictureInPicture
+        >
+          <source src={heroVideo} type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/60 via-foreground/40 to-foreground/70" />
       </div>
 
